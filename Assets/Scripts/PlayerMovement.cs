@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float MoveSpeed = 0.5f;
+    private float MoveSpeed = 1f;
     private float JumpHeight = 6;
     private float GravityScale = 1;
+    private bool IsGrounded;
     private Rigidbody2D rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,16 +18,36 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckForInput();
+
     }
 
     void CheckForInput()
     {
-        float horizontalInput = Input.GetAxis("Horizontal"); // Uses Unity's Input Manager for A/D or Left/Right arrows
-        rb.AddForce(new Vector2(horizontalInput * MoveSpeed, 0));
-        //rb.linearVelocity = new Vector2(horizontalInput * MoveSpeed, rb.linearVelocityY);
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (IsGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, JumpHeight);
+            float horizontalInput = Input.GetAxis("Horizontal"); // Uses Unity's Input Manager for A/D or Left/Right arrows
+            rb.AddForce(new Vector2(horizontalInput * MoveSpeed, 0));
+            //rb.linearVelocity = new Vector2(horizontalInput * MoveSpeed, rb.linearVelocityY);
+            if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocityX, JumpHeight);
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            IsGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            IsGrounded = false;
         }
     }
 }
