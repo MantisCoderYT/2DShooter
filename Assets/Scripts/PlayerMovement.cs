@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float MoveSpeed = 2500f;
+    private float MoveSpeed = 2000f;
     private float JumpHeight = 8f;
     private float GravityScale = 2f;
     private bool IsGrounded;
     private float GroundedDampening = 8f;
-    private float maxAngularVelocity = 200f;
+    private float maxAngularVelocity = 300f;
     private Rigidbody2D rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                rb.angularDamping = 0f;
+               rb.angularDamping = 0f;
             }
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" ||collision.gameObject.tag == "Object")
         {
             IsGrounded = true;
         }
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" ||collision.gameObject.tag == "Object")
         {
             IsGrounded = false;
         }

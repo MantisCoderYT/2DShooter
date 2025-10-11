@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3006112745885618971}
   m_Layer: 0
   m_Name: Pew Pea
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,3 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7111474298203307397}
+  sr: {fileID: 2387180139082110109}
