@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d0fce478250f7d549a19766ccd565b82
+guid: ba0d1df84b6ad4a4f8b0f46ce0c7fb5b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 797358442562367591
-    second: kback_0
+      213: -3187109477536895264
+    second: pngtree-apple-fruit-cartoon-apple-cartoon-fruit-png-image_330305_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kback_0
+      name: pngtree-apple-fruit-cartoon-apple-cartoon-fruit-png-image_330305_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1280
-        height: 720
+        x: 34
+        y: 13
+        width: 286
+        height: 309
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 760b6976749c01b00800000000000000
-      internalID: 797358442562367591
+      spriteID: 0eee123f0dc15c3d0800000000000000
+      internalID: -3187109477536895264
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      kback_0: 797358442562367591
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
