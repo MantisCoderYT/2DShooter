@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -9,7 +10,9 @@ public class ShootingScript : MonoBehaviour
     public GameObject Player;
     Rigidbody2D rb;
     public GameObject BulletPrefab;
-    private float RecoilForce = 100f;
+    public float RecoilForce = 100f;
+    public float RecoilTorque = 1.0f;
+    public float orientationAngleTolerance;
     
     void Start()
     {
@@ -28,7 +31,27 @@ public class ShootingScript : MonoBehaviour
     {
         Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         rb.AddForce(transform.right * -RecoilForce);
-         
+
+        // add torque to player based on direction gun is facing
+
+
+        // Get the dot product of the players right with the world's down
+        float dotProduct = Vector3.Dot(transform.right, Vector3.down);
+        // Convert the dot product to an angle
+        float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+
+        if (angle > orientationAngleTolerance)
+        {
+            Vector3 crossProduct = Vector3.Cross(transform.right, Vector3.up);
+            float rotationDirection = 1.0f;
+            if (crossProduct.z <= Mathf.Epsilon)
+            {
+                rotationDirection *= -1.0f;
+            }
+
+            rb.AddTorque(rotationDirection * RecoilTorque);
+
+        }
         
     }
 }
