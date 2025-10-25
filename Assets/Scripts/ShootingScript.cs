@@ -13,18 +13,23 @@ public class ShootingScript : MonoBehaviour
     public float RecoilForce = 100f;
     public float RecoilTorque = 1.0f;
     public float orientationAngleTolerance;
+    private LifeSystem lifeSystem;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lifeSystem = GetComponent<LifeSystem>();
     } 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+        if (!lifeSystem.IsDead)
         {
-            Shoot();
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Shoot();
+            }
         }
     }
     void Shoot()

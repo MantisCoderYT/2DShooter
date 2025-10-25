@@ -13,6 +13,7 @@ public class BulletScript : MonoBehaviour
     Color initialColor;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
+    bool fadeAndDestroyBullet = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,10 +29,10 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) || true)
-        { 
+        if(fadeAndDestroyBullet)
+        {
             DestroyTimer -= Time.deltaTime;
-            if (DestroyTimer <= 0.0f)
+            if (DestroyTimer <= Mathf.Epsilon)
             {
                 DestroyBullet();
             }
@@ -41,7 +42,7 @@ public class BulletScript : MonoBehaviour
         {
             sr.color = Color.Lerp(initialColor, alphaColor, (FadeTime - FadeTimer)/FadeTime);
             FadeTimer -= Time.deltaTime;
-            if (FadeTimer <= 0.0f)
+            if (FadeTimer <= Mathf.Epsilon)
             {
                 Destroy(gameObject);
             }

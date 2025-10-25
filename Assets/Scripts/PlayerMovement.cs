@@ -9,20 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded;
     private float GroundedDampening = 8f;
     private float maxAngularVelocity = 300f;
-    private bool IsDead;
     private Rigidbody2D rb;
+    private LifeSystem lifeSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lifeSystem = GetComponent<LifeSystem>();
         rb.gravityScale = GravityScale;
-        IsDead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsDead)
+        if (!lifeSystem.IsDead)
         {
             CheckForInput();
         }
@@ -32,13 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckForInput()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            rb.Sleep();
-            transform.position = new Vector2(0, 0);
-            transform.eulerAngles = new Vector3(0, 0, 0);
-
-        }
         if (IsGrounded)
             {
                 rb.angularDamping = GroundedDampening;
@@ -65,9 +58,16 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" ||collision.gameObject.tag == "Object")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Object")
         {
             IsGrounded = false;
         }
+    }
+
+    public void Respawn()
+    {
+        rb.Sleep();
+        transform.position = new Vector2(0, 0);
+        transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }
