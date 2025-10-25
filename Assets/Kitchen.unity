@@ -303,6 +303,9 @@ MonoBehaviour:
   FirePoint: {fileID: 284948333}
   Player: {fileID: 274332929}
   BulletPrefab: {fileID: 8200258265978495400, guid: ec4e82dad8fcb1f4dbadaa9e6aaaee25, type: 3}
+  RecoilForce: 100
+  RecoilTorque: 100
+  orientationAngleTolerance: 25
 --- !u!1 &284948332
 GameObject:
   m_ObjectHideFlags: 0
