@@ -8,10 +8,17 @@ public class LifeSystem : MonoBehaviour
     private float RespawnTime = 3.0f;
     private float RespawnDelay;
     PlayerMovement playerMovement;
+    SpriteRenderer spriteRenderer;
+    SpriteRenderer gunRenderer;
+    Transform gunTransform;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        gunTransform = transform.Find("Pew Pew Thing");
+        gunRenderer = gunTransform.GetComponent<SpriteRenderer>();
+        ToggleVisibility(true);
         IsDead = false;
         RespawnDelay = RespawnTime;
     }
@@ -39,6 +46,7 @@ public class LifeSystem : MonoBehaviour
     void HandleDeath()
     {
         RespawnDelay -= Time.deltaTime;
+        ToggleVisibility(false);
         if(RespawnDelay <= Mathf.Epsilon)
         {
             Respawn();
@@ -47,7 +55,13 @@ public class LifeSystem : MonoBehaviour
     void Respawn()
     {
         RespawnDelay = RespawnTime;
+        ToggleVisibility(true);
         IsDead = false;
         playerMovement.Respawn();
+    }
+    void ToggleVisibility(bool show)
+    {
+        spriteRenderer.enabled = show;
+        gunRenderer.enabled = show;
     }
 }

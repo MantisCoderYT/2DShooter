@@ -13,6 +13,7 @@ public class BackGroundScrolling : MonoBehaviour
     private float offsetx;
     [SerializeField]
     private float offsety;
+    [SerializeField]
     public Vector2 offset;
 
     
