@@ -81,6 +81,7 @@ public class LifeSystem : MonoBehaviour
     {
         Instantiate(deathPieces, transform.position, transform.rotation);
         Rigidbody2D[] childrenRB2D = deathPieces.GetComponentsInChildren<Rigidbody2D>();
+        //sets the velocity for each child
         foreach(Rigidbody2D rb2d in childrenRB2D)
         {
             rb2d.linearVelocity = rb.linearVelocity;
