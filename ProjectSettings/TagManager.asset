@@ -7,11 +7,12 @@ TagManager:
   - Ground
   - Object
   - Destroyer
+  - Gun
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Gun Layer
   - Water
   - UI
   - 
