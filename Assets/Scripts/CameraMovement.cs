@@ -9,13 +9,14 @@ public class CameraMovement : MonoBehaviour
     private float offsetx;
     [SerializeField]
     private float offsety;
+    LifeSystem lifeSystem;
     public float cameraSpeedThreshold = 1.0f;
 
     public float cameraSpeed = 1.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        lifeSystem = player.GetComponent<LifeSystem>();
     }
 
     // Update is called once per frame
@@ -29,7 +30,10 @@ public class CameraMovement : MonoBehaviour
         // resultMagnitude = (resultMagnitude > cameraSpeedThreshold) ? cameraSpeedThreshold : resultMagnitude;
         // resultMagnitude = 1.0f;
         //transform.position = transform.position + resultVector.normalized * resultMagnitude * cameraSpeed;
-        transform.position = new Vector3(playertransform.position.x, playertransform.position.y, transform.position.z);
+        if (!lifeSystem.IsDead)
+        {
+            transform.position = new Vector3(playertransform.position.x, playertransform.position.y, transform.position.z);
+        }
         
 
     }

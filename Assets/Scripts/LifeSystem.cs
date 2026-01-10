@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Unity.Mathematics;
+using UnityEditor.Callbacks;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 public class LifeSystem : MonoBehaviour
@@ -9,13 +11,18 @@ public class LifeSystem : MonoBehaviour
     private float RespawnDelay;
     PlayerMovement playerMovement;
     SpriteRenderer spriteRenderer;
+    Rigidbody2D rb;
+    CircleCollider2D cc2d;
     SpriteRenderer gunRenderer;
     Transform gunTransform;
+    public GameObject deathPieces;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        cc2d = GetComponent<CircleCollider2D>();
         gunTransform = transform.Find("Pew Pew Thing");
         gunRenderer = gunTransform.GetComponent<SpriteRenderer>();
         ToggleVisibility(true);
@@ -40,6 +47,9 @@ public class LifeSystem : MonoBehaviour
     }
     void Die()
     {
+        SpawnDeathPieces();
+        rb.simulated = false;
+        cc2d.enabled = false;
         IsDead = true;
     }
 
@@ -57,11 +67,24 @@ public class LifeSystem : MonoBehaviour
         RespawnDelay = RespawnTime;
         ToggleVisibility(true);
         IsDead = false;
+        rb.simulated = true;
+        cc2d.enabled = true;
         playerMovement.Respawn();
     }
     void ToggleVisibility(bool show)
     {
         spriteRenderer.enabled = show;
         gunRenderer.enabled = show;
+    }
+
+    void SpawnDeathPieces()
+    {
+        Instantiate(deathPieces, transform.position, transform.rotation);
+        Rigidbody2D[] childrenRB2D = deathPieces.GetComponentsInChildren<Rigidbody2D>();
+        foreach(Rigidbody2D rb2d in childrenRB2D)
+        {
+            rb2d.linearVelocity = rb.linearVelocity;
+        }
+
     }
 }
