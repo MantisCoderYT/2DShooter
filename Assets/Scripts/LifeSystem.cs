@@ -1,3 +1,4 @@
+using System.Data;
 using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEditor.Callbacks;
@@ -15,6 +16,7 @@ public class LifeSystem : MonoBehaviour
     CircleCollider2D cc2d;
     SpriteRenderer gunRenderer;
     Transform gunTransform;
+    GameObject pieces;
     public GameObject deathPieces;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,6 +71,7 @@ public class LifeSystem : MonoBehaviour
         IsDead = false;
         rb.simulated = true;
         cc2d.enabled = true;
+        Destroy(pieces);
         playerMovement.Respawn();
     }
     void ToggleVisibility(bool show)
@@ -79,7 +82,7 @@ public class LifeSystem : MonoBehaviour
 
     void SpawnDeathPieces()
     {
-        Instantiate(deathPieces, transform.position, transform.rotation);
+        pieces = Instantiate(deathPieces, transform.position, transform.rotation);
         Rigidbody2D[] childrenRB2D = deathPieces.GetComponentsInChildren<Rigidbody2D>();
         //sets the velocity for each child
         foreach(Rigidbody2D rb2d in childrenRB2D)
