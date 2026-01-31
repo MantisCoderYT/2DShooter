@@ -13,7 +13,6 @@ public class FollowObject : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        Debug.Log("Follow Update");
         Vector2 followVec = followSubject.transform.position;
         transform.position = new Vector3(followVec.x + followOffset.x, followVec.y + followOffset.y);
     }

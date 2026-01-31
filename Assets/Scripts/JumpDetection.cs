@@ -18,7 +18,6 @@ public class JumpDetection : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Object"))
         {
-            Debug.Log("col");
             playerMovement.Grounded();
         }
     }

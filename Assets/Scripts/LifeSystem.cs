@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Diagnostics;
 using Unity.Mathematics;
@@ -11,6 +12,7 @@ public class LifeSystem : MonoBehaviour
     public bool IsDead;
     private float RespawnTime = 3.0f;
     private float RespawnDelay;
+    private Vector2 PreviousVelocity;
     PlayerMovement playerMovement;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
@@ -43,6 +45,10 @@ public class LifeSystem : MonoBehaviour
         if (IsDead)
         {
             HandleDeath();
+        }
+        else
+        {
+            PreviousVelocity = rb.linearVelocity;
         }
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -88,11 +94,12 @@ public class LifeSystem : MonoBehaviour
     void SpawnDeathPieces()
     {
         pieces = Instantiate(deathPieces, transform.position, transform.rotation);
-        Rigidbody2D[] childrenRB2D = deathPieces.GetComponentsInChildren<Rigidbody2D>();
+        Rigidbody2D[] childrenRB2D = pieces.GetComponentsInChildren<Rigidbody2D>();
         //sets the velocity for each child
         foreach(Rigidbody2D rb2d in childrenRB2D)
         {
-            rb2d.linearVelocity = rb.linearVelocity;
+
+            rb2d.linearVelocity = PreviousVelocity;
         }
 
     }
