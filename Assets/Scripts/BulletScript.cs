@@ -13,7 +13,6 @@ public class BulletScript : MonoBehaviour
     Color initialColor;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
-    bool fadeAndDestroyBullet = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,13 +28,10 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fadeAndDestroyBullet)
+        DestroyTimer -= Time.deltaTime;
+        if (DestroyTimer <= Mathf.Epsilon)
         {
-            DestroyTimer -= Time.deltaTime;
-            if (DestroyTimer <= Mathf.Epsilon)
-            {
-                DestroyBullet();
-            }
+            DestroyBullet();
         }
 
         if (isDestroyed)

@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float MoveSpeed = 2000f;
+    private float MoveSpeed = 1000f;
     private float JumpHeight = 10f;
     private float GravityScale = 2f;
     [SerializeField]
     private bool IsGrounded;
-    private float GroundedDampening = 8f;
-    private float maxAngularVelocity = 800f;
+    private float GroundedDampening = 5f;
+    private float maxAngularVelocity = 2000f;
     private Rigidbody2D rb;
     private LifeSystem lifeSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
