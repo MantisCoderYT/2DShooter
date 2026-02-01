@@ -58,6 +58,13 @@ public class LifeSystem : MonoBehaviour
             Die();
         }
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag ("Destroyer"))
+        {
+            Die();
+        }
+    }
     void Die()
     {
         SpawnDeathPieces();
