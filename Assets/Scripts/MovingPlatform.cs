@@ -33,7 +33,6 @@ public class MovingPlatform : MonoBehaviour
             SetTarget(movingAway ? starting : destination);
         }
     }
-
     void SetTarget(Vec2 endpoint)
     {
         target = endpoint;

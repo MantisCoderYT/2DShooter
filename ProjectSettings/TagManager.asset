@@ -8,6 +8,8 @@ TagManager:
   - Object
   - Destroyer
   - Gun
+  - JumpDetector
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
